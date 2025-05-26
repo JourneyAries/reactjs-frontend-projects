@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { TabButton } from './TabButton';
 import { dataTabBar } from './constants';
+import type { TabBarProps } from './types';
 
-export const TabBar = () => {
-	const [activeButton, setActiveButton] = useState<string>('all');
-
+export const TabBar = ({ activeButton, setActiveButton }: TabBarProps) => {
 	const handleClick = (id: string) => {
 		setActiveButton(id);
 	};

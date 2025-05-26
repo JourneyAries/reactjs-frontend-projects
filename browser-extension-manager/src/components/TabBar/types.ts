@@ -6,3 +6,8 @@ export type TabButtonProps = {
 	handleClick: (id: string) => void;
 	id: string;
 };
+
+export type TabBarProps = {
+	activeButton: string;
+	setActiveButton: (id: string) => void;
+};
