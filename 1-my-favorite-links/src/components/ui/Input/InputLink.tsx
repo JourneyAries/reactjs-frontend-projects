@@ -2,7 +2,7 @@ import { useEffect, useState, type ChangeEvent } from 'react';
 import { BiBookmarkAlt, BiInfoSquare } from 'react-icons/bi';
 import clsx from 'clsx';
 
-export const InputText = () => {
+export const InputLink = () => {
 	const [text, setText] = useState<string>('');
 	const [errMessage, setErrMessage] = useState<string>('');
 	const [isTouched, setIsTouched] = useState<boolean>(false);
@@ -16,9 +16,9 @@ export const InputText = () => {
 	}, [errMessage]);
 
 	const validateInputText = (value: string) => {
-		if (!value) return 'Title cannot be empty';
-		const re = /^[a-zA-Z]{5,}$/;
-		if (!re.test(value)) return 'Title must more than 5 letter';
+		if (!value) return 'URL cannot be empty';
+		const re = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/\S*)?$/i;
+		if (!re.test(value)) return 'Please enter valid URL';
 		return '';
 	};
 
@@ -52,7 +52,7 @@ export const InputText = () => {
 				/>
 				<input
 					type='text'
-					placeholder='Enter the Title'
+					placeholder='URL'
 					value={text}
 					onChange={handleChange}
 					onBlur={handleBlur}
