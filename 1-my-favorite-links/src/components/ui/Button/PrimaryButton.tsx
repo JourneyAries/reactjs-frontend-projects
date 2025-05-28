@@ -7,7 +7,7 @@ export const PrimaryButton = ({ isValid }: PrimaryButtonProps) => {
 		<button
 			type='submit'
 			className={clsx(
-				'cursor-pointer flex rounded-sm py-1 px-2 w-[80px] items-center justify-center',
+				'cursor-pointer flex h-fit rounded-sm py-1 px-2 w-[80px] items-center justify-center',
 				isValid
 					? 'font-bold bg-violet-600 text-white'
 					: 'hover:bg-slate-200 text-slate-600 bg-slate-300',
