@@ -4,7 +4,8 @@ export type FormValues = {
 };
 
 export type FavLinkProps = {
-	id: number | string;
+	_id: string;
 	title: string;
 	link: string;
+	// handleDelete: (id: string) => void;
 };
