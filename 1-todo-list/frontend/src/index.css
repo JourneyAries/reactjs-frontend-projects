@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+@theme {
+	--shadow-bottom: 0 2px 0 0 oklch(49.6% 0.265 301.924);
+}
