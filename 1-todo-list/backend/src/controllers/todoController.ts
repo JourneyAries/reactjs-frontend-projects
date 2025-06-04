@@ -1,8 +1,8 @@
+import mongoose from 'mongoose';
 import TodoModel from '../models/TodoModel';
 import { HttpError } from '../errors/HttpError';
 import { sendSuccess } from '../success/HttpSuccess';
 import { TodoController } from '../types';
-import mongoose from 'mongoose';
 
 // [GET] /todos
 export const getTodos: TodoController = async (req, res, next) => {
@@ -19,9 +19,9 @@ export const getTodos: TodoController = async (req, res, next) => {
 
 // [POST] /todos
 export const postTodo: TodoController = async (req, res, next) => {
-	const { title } = req.body;
+	const { text } = req.body;
 	const newTodo = new TodoModel({
-		title,
+		text,
 	});
 	const logPrefix = 'POST /todos/:id -';
 	try {

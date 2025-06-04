@@ -1,6 +1,7 @@
 export type TodoItemProps = {
-	id: number;
+	_id: string;
 	text: string;
 	checked: boolean;
-	handleToggle: (id: number) => void;
+	handleToggle: (_id: string) => void;
+	deleteTodo: (_id: string) => void;
 };

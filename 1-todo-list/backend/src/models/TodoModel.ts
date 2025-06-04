@@ -1,14 +1,10 @@
-import mongoose, { Schema, Document } from 'mongoose';
-
-export type TodoModel = Document & {
-	title: string;
-	completed: boolean;
-};
+import mongoose, { Schema } from 'mongoose';
+import { TodoModel } from '../types';
 
 // Buat Scheme mongoose untuk collection 'todos' dengan field task
 const TodoModelSchema: Schema = new Schema({
-	title: { type: String, required: true },
-	completed: { type: Boolean, default: false },
+	text: { type: String, required: true },
+	checked: { type: Boolean, default: false },
 });
 
 TodoModelSchema.set('toJSON', {
