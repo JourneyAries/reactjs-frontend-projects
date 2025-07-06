@@ -2,7 +2,7 @@ import React from 'react';
 
 export type ButtonAddProps = {
   active: boolean;
-  todoAdd: () => void;
+  onAddTodo: () => void;
 };
 
 export type InputTextProps = {
@@ -19,10 +19,14 @@ export type TodoItem = {
 };
 
 export type TodoProps = TodoItem & {
-  toggleCheck: (id: string) => void;
-  deleteTodo: (id: string) => void;
+  // toggleCheck: (id: string) => void;
+  // deleteTodo: (id: string) => void;
 };
 
 export type TabProps = {
   counter: number;
+};
+
+export type NewTodo = {
+  task: string;
 };

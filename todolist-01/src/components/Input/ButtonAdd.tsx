@@ -1,12 +1,13 @@
+'use client';
 import clsx from 'clsx';
 import { BiPlus } from 'react-icons/bi';
 import { ButtonAddProps } from '../types';
 
-export const ButtonAdd = ({ active, todoAdd }: ButtonAddProps) => {
+export const ButtonAdd = ({ active, onAddTodo }: ButtonAddProps) => {
   return (
     <button
+      onClick={onAddTodo}
       type='submit'
-      onClick={todoAdd}
       className={clsx(
         'flex rounded py-1 px-2 items-center',
         !active

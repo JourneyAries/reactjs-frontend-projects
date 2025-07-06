@@ -7,35 +7,39 @@ import { Title } from '@/components/Title';
 import { Todo } from '@/components/Todo';
 import React, { useState } from 'react';
 import { v4 as generateId } from 'uuid';
+import {
+  useGetTodosQuery,
+  usePostTodoMutation,
+} from '@/features/todos/todoApi';
 
 export default function Home() {
-  const [todos, setTodos] = useState<TodoItem[]>([
-    { id: '1', task: 'mandi', checked: false },
-    { id: '2', task: 'makan', checked: true },
-  ]);
+  const { data: todos } = useGetTodosQuery();
+  const [postTodo] = usePostTodoMutation();
+
+  // const [todos, setTodos] = useState<TodoItem[]>([
+  //   { id: '1', task: 'mandi', checked: false },
+  //   { id: '2', task: 'makan', checked: true },
+  // ]);
 
   const [inputText, setInputText] = useState<string>('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
   };
 
-  const toggleCheck = (id: string) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
-  };
+  // const toggleCheck = (id: string) => {
+  //   setTodos((prev) =>
+  //     prev.map((todo) =>
+  //       todo.id === id ? { ...todo, checked: !todo.checked } : todo
+  //     )
+  //   );
+  // };
 
-  const deleteTodo = (id: string) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  };
+  // const deleteTodo = (id: string) => {
+  //   setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  // };
 
-  const todoAdd = () => {
-    setTodos((prev) => [
-      ...prev,
-      { id: generateId(), task: inputText, checked: false },
-    ]);
+  const onAddTodo = async () => {
+    await postTodo({ task: inputText });
     setInputText('');
   };
 
@@ -47,14 +51,14 @@ export default function Home() {
           inputText={inputText}
           handleChange={handleChange}
           active={inputText.length >= 5}
-          todoAdd={todoAdd}
+          onAddTodo={onAddTodo}
         />
         <div className='flex'>
-          <Tab counter={todos.length} />
+          <Tab counter={todos?.length ?? 0} />
         </div>
 
         <ul className='flex flex-col gap-y-2'>
-          {[...todos]
+          {[...(todos ?? [])]
             .sort((a, b) => Number(a.checked) - Number(b.checked))
             .map((todo) => (
               <Todo
@@ -62,8 +66,8 @@ export default function Home() {
                 id={todo.id}
                 task={todo.task}
                 checked={todo.checked}
-                toggleCheck={toggleCheck}
-                deleteTodo={deleteTodo}
+                // toggleCheck={toggleCheck}
+                // deleteTodo={deleteTodo}
               />
             ))}
         </ul>
