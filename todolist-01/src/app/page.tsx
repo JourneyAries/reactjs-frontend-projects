@@ -8,6 +8,7 @@ import { Todo } from '@/components/Todo';
 import React, { useState } from 'react';
 import { v4 as generateId } from 'uuid';
 import {
+  useDeleteTodoMutation,
   useGetTodosQuery,
   usePostTodoMutation,
 } from '@/features/todos/todoApi';
@@ -15,6 +16,7 @@ import {
 export default function Home() {
   const { data: todos } = useGetTodosQuery();
   const [postTodo] = usePostTodoMutation();
+  const [deleteTodo] = useDeleteTodoMutation();
 
   // const [todos, setTodos] = useState<TodoItem[]>([
   //   { id: '1', task: 'mandi', checked: false },
@@ -34,9 +36,13 @@ export default function Home() {
   //   );
   // };
 
-  // const deleteTodo = (id: string) => {
-  //   setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  // };
+  const deleteTodoAction = async (id: string) => {
+    try {
+      await deleteTodo(id).unwrap();
+    } catch (error) {
+      console.error('Failed to delete todo: ', error);
+    }
+  };
 
   const onAddTodo = async () => {
     await postTodo({ task: inputText });
@@ -66,8 +72,8 @@ export default function Home() {
                 id={todo.id}
                 task={todo.task}
                 checked={todo.checked}
+                deleteTodoAction={deleteTodoAction}
                 // toggleCheck={toggleCheck}
-                // deleteTodo={deleteTodo}
               />
             ))}
         </ul>

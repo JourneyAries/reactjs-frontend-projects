@@ -19,8 +19,8 @@ export type TodoItem = {
 };
 
 export type TodoProps = TodoItem & {
+  deleteTodoAction: (id: string) => void;
   // toggleCheck: (id: string) => void;
-  // deleteTodo: (id: string) => void;
 };
 
 export type TabProps = {

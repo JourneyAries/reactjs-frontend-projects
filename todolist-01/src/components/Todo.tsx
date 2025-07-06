@@ -8,6 +8,7 @@ export const Todo = ({
   id,
   task,
   checked,
+  deleteTodoAction,
   // toggleCheck,
   // deleteTodo,
 }: TodoProps) => {
@@ -23,17 +24,11 @@ export const Todo = ({
       ) : (
         <BiSolidCheckbox className='text-2xl text-violet-600' />
       )}
-      <p
-        className={clsx(
-          'w-full text-slate-900 select-none',
-          checked && 'line-through'
-        )}>
-        {task}
-      </p>
+      <p className={clsx('w-full text-slate-900 select-none', checked && 'line-through')}>{task}</p>
       <CgClose
         onClick={(e) => {
           e.stopPropagation();
-          // deleteTodo(id);
+          deleteTodoAction(id);
         }}
         className='text-slate-400 text-xl'
       />

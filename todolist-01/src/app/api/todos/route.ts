@@ -9,10 +9,7 @@ export async function GET() {
     const todos = await Todo.find().lean();
     return NextResponse.json(normalizedArray(todos));
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Error while GET todos' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Error while GET todos' }, { status: 400 });
   }
 }
 
@@ -31,9 +28,6 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newTodo, { status: 201 });
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Error while POST todo' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Error while POST todo' }, { status: 500 });
   }
 }
