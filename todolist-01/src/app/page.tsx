@@ -10,6 +10,7 @@ import { v4 as generateId } from 'uuid';
 import {
   useDeleteTodoMutation,
   useGetTodosQuery,
+  usePatchTodoMutation,
   usePostTodoMutation,
 } from '@/features/todos/todoApi';
 
@@ -17,6 +18,7 @@ export default function Home() {
   const { data: todos } = useGetTodosQuery();
   const [postTodo] = usePostTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
+  const [updateTodo] = usePatchTodoMutation();
 
   // const [todos, setTodos] = useState<TodoItem[]>([
   //   { id: '1', task: 'mandi', checked: false },
@@ -49,6 +51,14 @@ export default function Home() {
     setInputText('');
   };
 
+  const updateTodoAction = async (id: string, checked: boolean) => {
+    try {
+      await updateTodo({ id, checked: !checked }).unwrap();
+    } catch (error) {
+      console.error('Failed to update todo: ', error);
+    }
+  };
+
   return (
     <div className='flex items-center justify-center h-screen bg-violet-200'>
       <main className='flex flex-col gap-y-5 bg-white rounded p-8 w-[640px]'>
@@ -73,7 +83,7 @@ export default function Home() {
                 task={todo.task}
                 checked={todo.checked}
                 deleteTodoAction={deleteTodoAction}
-                // toggleCheck={toggleCheck}
+                updateTodoAction={updateTodoAction}
               />
             ))}
         </ul>

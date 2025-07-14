@@ -9,12 +9,13 @@ export const Todo = ({
   task,
   checked,
   deleteTodoAction,
+  updateTodoAction,
   // toggleCheck,
   // deleteTodo,
 }: TodoProps) => {
   return (
     <li
-      // onClick={() => toggleCheck(id)}
+      onClick={() => updateTodoAction(id, checked)}
       className={clsx(
         'flex gap-x-1 items-center p-2 rounded border border-transparent cursor-pointer',
         checked ? 'bg-slate-100' : 'bg-violet-100 border border-violet-300'

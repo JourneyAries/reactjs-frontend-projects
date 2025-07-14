@@ -20,7 +20,7 @@ export type TodoItem = {
 
 export type TodoProps = TodoItem & {
   deleteTodoAction: (id: string) => void;
-  // toggleCheck: (id: string) => void;
+  updateTodoAction: (id: string, checked: boolean) => void;
 };
 
 export type TabProps = {
